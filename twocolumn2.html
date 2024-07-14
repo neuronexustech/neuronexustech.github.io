@@ -12,20 +12,19 @@
     <link rel="stylesheet" href="assets/css/main.css" />
     <script src="https://apis.google.com/js/platform.js"></script>
     <style>
-        /* Style for the back button */
-        #back-button {
-            position: absolute;
-            top: 20px;
-            left: 20px;
+        /* Style for the button */
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
             background-color: #333;
             color: #fff;
-            padding: 10px 20px;
             text-decoration: none;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            margin-right: 10px; /* Adjust margin as needed */
         }
-        #back-button:hover {
+        .button:hover {
             background-color: #555;
         }
     </style>
@@ -43,7 +42,7 @@
                     <h1><a href="index.html" id="logo">neuronexustech.github.io</a></h1>
 
                     <!-- Back button -->
-                    <a href="#" onclick="history.go(-1)" id="back-button">Back</a>
+                    <a href="#" onclick="history.go(-1)" class="button">Back</a>
 
                     <!-- Nav -->
                     <nav id="nav">
@@ -52,6 +51,7 @@
                         <a href="twocolumn1.html">How-To Guides</a>
                         <a href="twocolumn2.html">Socials</a>
                         <a href="onecolumn.html">Buy me a coffee</a>
+                        <a href="https://your-profile-link" target="_blank" class="button">Your Profile</a>
                     </nav>
 
                 </div>
@@ -72,8 +72,11 @@
                             <h3>Find all our socials below</h3>
                         </header>
                         <a href="https://www.youtube.com/channel/UCfUOhEssUz2e2vyMpmmzlDw"><div class="g-ytsubscribe" data-channelid="UCfUOhEssUz2e2vyMpmmzlDw" data-layout="default" data-theme="dark" data-count="default"></div></a>
-					    <a href="https://x.com/neuronexustech_" class="button">X (Twitter)</a>
-						</section>
+
+                        <!-- X button -->
+                        <a href="#" class="button">X</a>
+
+                    </section>
                 </div>
             </div>
         </div>
