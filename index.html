@@ -10,10 +10,8 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
-		
-		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8856604873249841"crossorigin="anonymous"></script>
-		<meta name="google-adsense-account" content="ca-pub-8856604873249841">
-		
+		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8856604873249841"
+     crossorigin="anonymous"></script>
 	</head>
 	<body>
 		<div id="page-wrapper">
@@ -31,7 +29,7 @@
 									<nav id="nav">
 										<a href="index.html">Homepage</a>
 										<a href="threecolumn.html">Downloads</a>
-										<a href="twocolumn1.html">News</a>
+										<a href="twocolumn1.html">How-To Guides</a>
 										<a href="twocolumn2.html">Socials</a>
 										<a href="onecolumn.html">Buy me a coffe</a>
 									</nav>
@@ -46,7 +44,7 @@
 
 									<!-- Banner Copy -->
 										<p>We do something really useful, important, and unique. Learn all about it here ...</p>
-										<a href="#" class="button-large">Go on, click me!</a>
+										<button id="random-game-button"class="button-large">Play a Random Game</button>
 
 								</div>
 								<div class="col-6 col-12-medium imp-medium">
@@ -137,7 +135,7 @@
 										</header>
 										<a href="#" class="feature-image"><img src="images/pic05.jpg" alt="" /></a>
 										<p>
-											We are a small team of two located somewhere in this wonderful planet, our main goal is to share knowledge for free. 
+											We are a small team of two located somewhere in this wondrful planet, our main goal is to share knowledge for free. 
 										</p>
 									</section>
 
@@ -271,6 +269,25 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script>
+        // List of random game URLs
+        const gameUrls = [
+            https://poki.com/en/g/temple-run-2,
+            'https://example-game2.com',
+            'https://example-game3.com',
+            // Add more game URLs here
+        ];
+
+        // Function to open a random game
+        function openRandomGame() {
+            const randomIndex = Math.floor(Math.random() * gameUrls.length);
+            const randomGameUrl = gameUrls[randomIndex];
+            window.open(randomGameUrl, '_blank');
+        }
+
+        // Add event listener to the button
+        document.getElementById('random-game-button').addEventListener('click', openRandomGame);
+    </script>
 
 	</body>
 </html>
