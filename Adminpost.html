@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page - Manage Posts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        header {
+            background-color: #ff4500;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+        }
+        .admin-login-form, .new-post-form, .post-list {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        .admin-login-form input, .new-post-form input, .new-post-form textarea {
+            width: calc(100% - 22px);
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .admin-login-form button, .new-post-form button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ff4500;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .post-list ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .post-list li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .post-list button {
+            background-color: #ff4500;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .post-list button:hover {
+            background-color: #e03d00;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Admin Page - Manage Posts</h1>
+    </header>
+    <div class="container">
+        <!-- Admin Login Form -->
+        <div class="admin-login-form">
+            <h2>Admin Login</h2>
+            <label for="adminPassword">Password:</label>
+            <input type="password" id="adminPassword" placeholder="Admin Password" required>
+            <button id="adminLoginButton">Login</button>
+        </div>
+
+        <!-- New Post Form -->
+        <div class="new-post-form" style="display: none;">
+            <h2>Create a New Post</h2>
+            <label for="postTitle">Title:</label>
+            <input type="text" id="postTitle" placeholder="Post Title" required>
+            <label for="postContent">Content:</label>
+            <textarea id="postContent" rows="5" placeholder="Post Content" required></textarea>
+            <label for="postImage">Upload Image (optional):</label>
+            <input type="file" id="postImage" accept="image/*">
+            <label for="postLink">Link URL (optional):</label>
+            <input type="url" id="postLink" placeholder="Link URL">
+            <button id="submitPost">Submit Post</button>
+        </div>
+
+        <!-- Post List -->
+        <div class="post-list" style="display: none;">
+            <h2>Manage Posts</h2>
+            <ul id="postListContainer">
+                <!-- Posts will be appended here dynamically -->
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const adminPassword = 'asd'; // Replace with your actual admin password
+
+        document.getElementById('adminLoginButton').addEventListener('click', function() {
+            const enteredPassword = document.getElementById('adminPassword').value;
+
+            if (enteredPassword === adminPassword) {
+                document.querySelector('.admin-login-form').style.display = 'none';
+                document.querySelector('.new-post-form').style.display = 'block';
+                document.querySelector('.post-list').style.display = 'block';
+                loadPosts();
+            } else {
+                alert('Incorrect password. Please try again.');
+            }
+        });
+
+        document.getElementById('submitPost').addEventListener('click', function(event) {
+            event.preventDefault();  // Prevent form submission
+
+            const title = document.getElementById('postTitle').value;
+            const content = document.getElementById('postContent').value;
+            const imageFile = document.getElementById('postImage').files[0];
+            const linkURL = document.getElementById('postLink').value;
+
+            if (title.trim() === '' || content.trim() === '') {
+                alert('Both title and content are required.');
+                return;
+            }
+
+            let post = {
+                title: title,
+                content: content,
+                linkURL: linkURL,
+                imageSrc: ''
+            };
+
+            if (imageFile) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    post.imageSrc = e.target.result;
+                    savePost(post);
+                };
+                reader.readAsDataURL(imageFile);
+            } else {
+                savePost(post);
+            }
+        });
+
+        function savePost(post) {
+            let posts = JSON.parse(localStorage.getItem('posts')) || [];
+            posts.unshift(post);
+            localStorage.setItem('posts', JSON.stringify(posts));
+            alert('Post submitted successfully!');
+            clearForm();
+            loadPosts();
+        }
+
+        function clearForm() {
+            document.getElementById('postTitle').value = '';
+            document.getElementById('postContent').value = '';
+            document.getElementById('postImage').value = '';
+            document.getElementById('postLink').value = '';
+        }
+
+        function loadPosts() {
+            let posts = JSON.parse(localStorage.getItem('posts')) || [];
+            const postListContainer = document.getElementById('postListContainer');
+            postListContainer.innerHTML = ''; // Clear existing posts
+
+            posts.forEach((post, index) => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `
+                    <strong>${post.title}</strong>
+                    <button onclick="deletePost(${index})">Delete</button>
+                `;
+                postListContainer.appendChild(listItem);
+            });
+        }
+
+        window.deletePost = function(index) {
+            let posts = JSON.parse(localStorage.getItem('posts')) || [];
+            posts.splice(index, 1); // Remove the post at the specified index
+            localStorage.setItem('posts', JSON.stringify(posts));
+            loadPosts(); // Reload posts
+        };
+    </script>
+</body>
+</html>
