@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/main.css" />
     <title>How To Guides</title>
     <style>
         body {
@@ -17,6 +17,18 @@
             color: white;
             padding: 10px 20px;
             text-align: center;
+            position: relative; /* Required for positioning the back button */
+        }
+        .back-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #0079d3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
         }
         .container {
             width: 80%;
@@ -78,6 +90,7 @@
 </head>
 <body>
     <header>
+        <button class="back-button" onclick="window.history.back();">Back</button>
         <h1>How To Guides</h1>
     </header>
     <div class="container" id="postsContainer">
