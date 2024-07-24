@@ -10,8 +10,34 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
-		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8856604873249841"
-     crossorigin="anonymous"></script>
+		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8856604873249841" crossorigin="anonymous"></script>
+		<style>
+			.latest-posts {
+				background-color: white;
+				border: 1px solid #ddd;
+				border-radius: 5px;
+				padding: 10px;
+				margin: 20px auto;
+				width: 100%;
+			}
+			.latest-posts h2 {
+				text-align: center;
+				margin-bottom: 20px;
+			}
+			.post-link {
+				display: block;
+				padding: 10px;
+				border-bottom: 1px solid #ddd;
+				text-decoration: none;
+				color: #0079d3;
+			}
+			.post-link:hover {
+				background-color: #f0f0f0;
+			}
+			.post-link:last-child {
+				border-bottom: none;
+			}
+		</style>
 	</head>
 	<body>
 		<div id="page-wrapper">
@@ -28,9 +54,10 @@
 								<!-- Nav -->
 									<nav id="nav">
 										<a href="index.html">Homepage</a>
+										<a href="threecolumn.html">Downloads</a>
 										<a href="twocolumn1.html">How-To Guides</a>
 										<a href="twocolumn2.html">Socials</a>
-										<a href="onecolumn.html">Buy me a coffe</a>
+										<a href="onecolumn.html">Buy me a coffee</a>
 									</nav>
 
 							</div>
@@ -157,26 +184,12 @@
 								<!-- Box #3 -->
 									<section>
 										<header>
-											<h2>What People Are Saying</h2>
-											<h3>And a final subheading about our clients</h3>
+											<h2>Latest Tech News</h2>
+											<h3>The latest and most important updates</h3>
 										</header>
-										<ul class="quote-list">
-											<li>
-												<img src="images/pic06.jpg" alt="" />
-												<p>"Neque nisidapibus mattis"</p>
-												<span>Jane Doe, CEO of UntitledCorp</span>
-											</li>
-											<li>
-												<img src="images/pic07.jpg" alt="" />
-												<p>"Lorem ipsum consequat!"</p>
-												<span>John Doe, President of FakeBiz</span>
-											</li>
-											<li>
-												<img src="images/pic08.jpg" alt="" />
-												<p>"Magna veroeros amet tempus"</p>
-												<span>Mary Smith, CFO of UntitledBiz</span>
-											</li>
-										</ul>
+										<div class="latest-posts" id="latestPosts">
+											<!-- Latest posts will be dynamically added here -->
+										</div>
 									</section>
 
 							</div>
@@ -254,7 +267,23 @@
 
         // Add event listener to the button
         document.getElementById('random-game-button').addEventListener('click', openRandomGame);
-    </script>
 
+		// Fetch latest posts
+        async function fetchLatestPosts() {
+            const response = await fetch('https://api.example.com/latest-tech-posts'); // Replace with your API URL
+            const posts = await response.json();
+
+            const latestPostsDiv = document.getElementById('latestPosts');
+            posts.forEach(post => {
+                const postLink = document.createElement('a');
+                postLink.href = post.url;
+                postLink.className = 'post-link';
+                postLink.textContent = post.title;
+                latestPostsDiv.appendChild(postLink);
+            });
+        }
+
+        fetchLatestPosts();
+    </script>
 	</body>
 </html>
