@@ -1,107 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/main.css">
-    <title>How To Guides</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
-        }
-        header {
-            background-color: #B43B21;
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
-            position: relative;
-        }
-        .container {
-            width: 80%;
-            margin: 20px auto;
-        }
-        .post {
-            background-color: white;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-        }
-        .post img {
-            max-width: 100%;
-            border-radius: 5px;
-            margin: 10px 0;
-        }
-        .post .content {
-            display: none;
-            margin-bottom: 10px;
-        }
-        .post .content a {
-            color: #0079d3;
-            text-decoration: none;
-        }
-        .post .content a:hover {
-            text-decoration: underline;
-        }
-        .post .title-link {
-            color: #0079d3;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        .post .title-link:hover {
-            text-decoration: underline;
-        }
-        .comment-section {
-            margin-top: 20px;
-            padding: 10px;
-            border-top: 1px solid #ddd;
-        }
-        .comment {
-            background-color: #eee;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            margin-top: 10px;
-            padding: 10px;
-        }
-        .comment .username {
-            font-weight: bold;
-        }
-        .comment .text {
-            margin-top: 5px;
-        }
+		<title>two column - neuronexustech.github.io by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8856604873249841"
+	crossorigin="anonymous"></script>
+    <!-- Header -->
+				<section id="header">
+					<div class="container">
+						<div class="row">
+							<div class="col-12">
 
-        /* Responsive Design */
-        @media (max-width: 600px) {
-            .container {
-                width: 95%;
-                margin: 0 auto;
-            }
-            .post {
-                margin: 10px 0;
-                padding: 10px;
-            }
-            .post img {
-                width: 100%;
-                height: auto;
-            }
-        }
-    </style>
+								<!-- Logo -->
+									<h1><a href="index.html" id="logo">neuronexustech.github.io</a></h1>
+
+								<!-- Nav -->
+									<nav id="nav">
+										<a href="index.html">Homepage</a>
+										<a href="twocolumn1.html">How-to Guides</a>
+										<a href="twocolumn2.html">Socials</a>
+										<a href="onecolumn.html">Buy me a coffe</a>
+									</nav>
+
+							</div>
+						</div>
+					</div>
+				</section>
 </head>
 <body>
-    <header>
-        <button class="back-button" onclick="window.history.back();">Back</button>
-        <h1>How To Guides</h1>
-    </header>
-    <div class="container" id="postsContainer">
-        <!-- Posts will be appended here dynamically -->
-    </div>
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             let posts = JSON.parse(localStorage.getItem('posts')) || [];
