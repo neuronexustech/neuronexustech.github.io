@@ -270,7 +270,7 @@
 
 		// Fetch latest posts
         async function fetchLatestPosts() {
-            const response = await fetch('https://api.example.com/latest-tech-posts'); // Replace with your API URL
+            const response = await fetch('https://api.gdeltproject.org/api/v2/summary/summary?query=technology'); // Replace with your API URL
             const posts = await response.json();
 
             const latestPostsDiv = document.getElementById('latestPosts');
