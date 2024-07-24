@@ -37,6 +37,7 @@
             margin: 10px 0;
         }
         .post .content {
+            display: none;
             margin-bottom: 10px;
         }
         .post .content a {
@@ -44,6 +45,14 @@
             text-decoration: none;
         }
         .post .content a:hover {
+            text-decoration: underline;
+        }
+        .post .title-link {
+            color: #0079d3;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .post .title-link:hover {
             text-decoration: underline;
         }
         .comment-section {
@@ -83,10 +92,14 @@
                 const postContainer = document.createElement('div');
                 postContainer.className = 'post';
 
+                const titleLink = document.createElement('a');
+                titleLink.className = 'title-link';
+                titleLink.textContent = post.title;
+                titleLink.href = '#';
+
                 const contentDiv = document.createElement('div');
                 contentDiv.className = 'content';
                 let postContent = `
-                    <h2>${post.title}</h2>
                     <p>${post.content}</p>
                 `;
 
@@ -99,8 +112,14 @@
                 }
 
                 contentDiv.innerHTML = postContent;
+                postContainer.appendChild(titleLink);
                 postContainer.appendChild(contentDiv);
                 postsContainer.appendChild(postContainer);
+
+                titleLink.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    contentDiv.style.display = contentDiv.style.display === 'none' ? 'block' : 'none';
+                });
             });
         });
     </script>
