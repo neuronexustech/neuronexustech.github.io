@@ -41,6 +41,24 @@
             height: auto;
             margin-top: 10px;
         }
+
+        /* Search Bar Styles */
+        #searchContainer {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        #searchInput {
+            padding: 10px;
+            width: 200px;
+            font-size: 16px;
+        }
+
+        #searchButton {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8856604873249841" crossorigin="anonymous"></script>
     <title>neuronexustech.github.io</title>
@@ -67,6 +85,12 @@
                 </div>
             </div>
         </section>
+
+        <!-- Search Bar -->
+        <div id="searchContainer">
+            <input type="text" id="searchInput" placeholder="Search posts...">
+            <button id="searchButton">Search</button>
+        </div>
     </div>
 
     <div class="container" id="postsContainer">
@@ -77,42 +101,66 @@
         document.addEventListener('DOMContentLoaded', function() {
             let posts = JSON.parse(localStorage.getItem('posts')) || [];
             const postsContainer = document.getElementById('postsContainer');
+            const searchInput = document.getElementById('searchInput');
+            const searchButton = document.getElementById('searchButton');
 
-            if (posts.length === 0) {
-                postsContainer.innerHTML = '<p>No posts available.</p>';
-            } else {
-                posts.forEach(post => {
-                    const postContainer = document.createElement('div');
-                    postContainer.className = 'post';
+            function displayPosts(postsToDisplay) {
+                postsContainer.innerHTML = '';
+                if (postsToDisplay.length === 0) {
+                    postsContainer.innerHTML = '<p>No posts available.</p>';
+                } else {
+                    postsToDisplay.forEach(post => {
+                        const postContainer = document.createElement('div');
+                        postContainer.className = 'post';
 
-                    const titleLink = document.createElement('a');
-                    titleLink.className = 'title-link';
-                    titleLink.textContent = post.title;
-                    titleLink.href = '#';
+                        const titleLink = document.createElement('a');
+                        titleLink.className = 'title-link';
+                        titleLink.textContent = post.title;
+                        titleLink.href = '#';
 
-                    const contentDiv = document.createElement('div');
-                    contentDiv.className = 'content';
-                    let postContent = `<p>${post.content}</p>`;
+                        const contentDiv = document.createElement('div');
+                        contentDiv.className = 'content';
+                        let postContent = `<p>${post.content}</p>`;
 
-                    if (post.imageSrc) {
-                        postContent += `<img src="${post.imageSrc}" alt="Post Image">`;
-                    }
+                        if (post.imageSrc) {
+                            postContent += `<img src="${post.imageSrc}" alt="Post Image">`;
+                        }
 
-                    if (post.linkURL.trim() !== '') {
-                        postContent += `<p><a href="${post.linkURL}" target="_blank">${post.linkURL}</a></p>`;
-                    }
+                        if (post.linkURL.trim() !== '') {
+                            postContent += `<p><a href="${post.linkURL}" target="_blank">${post.linkURL}</a></p>`;
+                        }
 
-                    contentDiv.innerHTML = postContent;
-                    postContainer.appendChild(titleLink);
-                    postContainer.appendChild(contentDiv);
-                    postsContainer.appendChild(postContainer);
+                        contentDiv.innerHTML = postContent;
+                        postContainer.appendChild(titleLink);
+                        postContainer.appendChild(contentDiv);
+                        postsContainer.appendChild(postContainer);
 
-                    titleLink.addEventListener('click', function(event) {
-                        event.preventDefault();
-                        contentDiv.classList.toggle('active');
+                        titleLink.addEventListener('click', function(event) {
+                            event.preventDefault();
+                            contentDiv.classList.toggle('active');
+                        });
                     });
-                });
+                }
             }
+
+            // Display all posts initially
+            displayPosts(posts);
+
+            searchButton.addEventListener('click', function() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const filteredPosts = posts.filter(post => 
+                    post.title.toLowerCase().includes(searchTerm) ||
+                    post.content.toLowerCase().includes(searchTerm)
+                );
+                displayPosts(filteredPosts);
+            });
+
+            // Optional: Allow pressing Enter to search
+            searchInput.addEventListener('keypress', function(event) {
+                if (event.key === 'Enter') {
+                    searchButton.click();
+                }
+            });
         });
     </script>
 </body>
