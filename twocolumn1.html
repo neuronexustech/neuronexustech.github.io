@@ -4,6 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <link rel="stylesheet" href="assets/css/main.css">
+    <style>
+        .post {
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+
+        .title-link {
+            display: block;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #333;
+            border: 1px solid #ccc;
+            padding: 8px;
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
+
+        .title-link:hover {
+            background-color: #f0f0f0;
+        }
+
+        .content {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .content.active {
+            display: block;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+    </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8856604873249841" crossorigin="anonymous"></script>
     <title>neuronexustech.github.io</title>
 </head>
@@ -71,7 +109,7 @@
 
                     titleLink.addEventListener('click', function(event) {
                         event.preventDefault();
-                        contentDiv.style.display = contentDiv.style.display === 'none' ? 'block' : 'none';
+                        contentDiv.classList.toggle('active');
                     });
                 });
             }
